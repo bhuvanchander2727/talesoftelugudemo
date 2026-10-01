@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tales of Telugu — Heritage Telugu Cuisine & Culture</title>
+  <meta name="description" content="Tales of Telugu — Rooted in Tradition, Served with Love. A traditional Telugu culinary journey inspired by Andhra & Telangana folk heritage.">
+  
+  <!-- Google Fonts for Heritage Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Marcellus&family=Rozha+One&family=Philosopher:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Paper Texture Base Overlay -->
+  <div class="paper-texture-overlay"></div>
+  
+  <!-- Subtle Radial Parchment Highlight for Central Logo Focus -->
+  <div class="radial-focus-glow"></div>
+
+  <!-- Top Folk-Art Green Wave Border -->
+  <div class="top-wave-border" aria-hidden="true">
+    <svg viewBox="0 0 1200 24" preserveAspectRatio="none" class="wave-svg">
+      <path d="M0,12 Q30,2 60,12 T120,12 T180,12 T240,12 T300,12 T360,12 T420,12 T480,12 T540,12 T600,12 T660,12 T720,12 T780,12 T840,12 T900,12 T960,12 T1020,12 T1080,12 T1140,12 T1200,12" fill="none" stroke="#194326" stroke-width="2.5" />
+      <g fill="#194326">
+        <circle cx="30" cy="4" r="2.5"/><circle cx="90" cy="20" r="2.5"/>
+        <circle cx="150" cy="4" r="2.5"/><circle cx="210" cy="20" r="2.5"/>
+        <circle cx="270" cy="4" r="2.5"/><circle cx="330" cy="20" r="2.5"/>
+        <circle cx="390" cy="4" r="2.5"/><circle cx="450" cy="20" r="2.5"/>
+        <circle cx="510" cy="4" r="2.5"/><circle cx="570" cy="20" r="2.5"/>
+        <circle cx="630" cy="4" r="2.5"/><circle cx="690" cy="20" r="2.5"/>
+        <circle cx="750" cy="4" r="2.5"/><circle cx="810" cy="20" r="2.5"/>
+        <circle cx="870" cy="4" r="2.5"/><circle cx="930" cy="20" r="2.5"/>
+        <circle cx="990" cy="4" r="2.5"/><circle cx="1050" cy="20" r="2.5"/>
+        <circle cx="1110" cy="4" r="2.5"/><circle cx="1170" cy="20" r="2.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Left: Horizontal Logo Mark & Brand Title -->
+      <a href="#home" class="brand-logo-link" data-route="home" aria-label="Tales of Telugu Homepage">
+        <div class="brand-logo-wrapper">
+          <img src="assets/logo-horizontal-transparent.png" alt="Tales of Telugu Logo" class="header-logo-img" />
+        </div>
+      </a>
+
+      <!-- Right: Main Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#about" class="nav-link" data-route="about">About</a>
+          </li>
+          <li class="nav-separator" aria-hidden="true">
+            <span class="flower-icon">❁</span>
+          </li>
+          <li class="nav-item">
+            <a href="#menu" class="nav-link" data-route="menu">Menu</a>
+          </li>
+          <li class="nav-separator" aria-hidden="true">
+            <span class="flower-icon">❁</span>
+          </li>
+          <li class="nav-item">
+            <a href="#gallery" class="nav-link" data-route="gallery">Gallery</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Navigation Hamburger Button (phones only) -->
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Open Navigation Menu"
+        aria-expanded="false"
+        aria-controls="mobileDrawer"
+        type="button"
+      >
+        <span class="hbg-bar hbg-top" aria-hidden="true"></span>
+        <span class="hbg-bar hbg-mid" aria-hidden="true"></span>
+        <span class="hbg-bar hbg-bot" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="drawer-content">
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Menu">✕</button>
+      <div class="drawer-header">
+        <img src="assets/logo-mark-transparent.png" alt="Tales of Telugu Symbol" class="drawer-logo-mark" />
+        <h2 class="drawer-title">Tales of Telugu</h2>
+      </div>
+      <ul class="drawer-nav-list">
+        <li><a href="#home" class="drawer-link" data-route="home">Home</a></li>
+        <li class="drawer-sep">❁</li>
+        <li><a href="#menu" class="drawer-link" data-route="menu">Menu</a></li>
+        <li class="drawer-sep">❁</li>
+        <li><a href="#about" class="drawer-link" data-route="about">About</a></li>
+        <li class="drawer-sep">❁</li>
+        <li><a href="#gallery" class="drawer-link" data-route="gallery">Gallery</a></li>
+        <li class="drawer-sep">❁</li>
+        <li><button type="button" class="drawer-link drawer-reserve-btn" id="drawerReserveBtn" data-reserve-modal>Reserve a Table</button></li>
+      </ul>
+      <div class="drawer-footer-flourish">
+        <span>Rooted in Tradition</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN MULTI-PAGE VIEW WRAPPER -->
+  <main class="site-main">
+
+    <!-- SHARED LEFT & RIGHT DECORATIVE FOLK ARTWORK FRAMES -->
+    <div class="folk-artwork-left" id="folkArtLeft">
+      <img src="assets/left-artwork-transparent.png" alt="Traditional Telugu Folk Art - Tree of Life, Dancer, Nandi Bull" class="artwork-img" />
+    </div>
+    <div class="folk-artwork-right" id="folkArtRight">
+      <img src="assets/right-artwork-transparent.png" alt="Traditional Telugu Folk Art - Village Palms, Heritage Hut, Woman with Pot, Peacock" class="artwork-img" />
+    </div>
+
+    <!-- ====================================================================
+         1. HOMEPAGE VIEW (MASTER APPROVED HERO COMPOSITION)
+         ==================================================================== -->
+    <section class="page-view hero-container active" id="homeView" data-view="home">
+      
+      <!-- CENTER BRANDING IDENTITY -->
+      <div class="hero-center-brand">
+        
+        <!-- Primary Logo Asset: Squiggly frame + Telugu icon + TALES OF TELUGU -->
+        <div class="center-logo-container" id="centerLogoContainer">
+          <!-- SVG Squiggly Dot Border & Telugu Ligature Icon -->
+          <div class="logo-mark-frame">
+            <img src="assets/logo-mark-transparent.png" alt="Tales of Telugu Icon Mark" class="logo-mark-img" />
+          </div>
+          
+          <!-- Hand-carved Brand Name -->
+          <h1 class="logo-text-heading">
+            <img src="assets/logo-text-transparent.png" alt="TALES OF TELUGU" class="logo-text-img" />
+          </h1>
+        </div>
+
+        <!-- Tagline & Decorative Flourish -->
+        <div class="hero-tagline-wrapper">
+          <p class="hero-tagline">Rooted in Tradition • Served with Love</p>
+          <div class="tagline-flourish" aria-hidden="true">
+            <span class="flourish-line"></span>
+            <span class="flourish-flower">❁</span>
+            <span class="flourish-line"></span>
+          </div>
+        </div>
+
+        <!-- Hero CTA Buttons -->
+        <div class="hero-cta-container">
+          <button type="button" class="hero-cta-btn cta-reserve" id="heroReserveBtn" data-reserve-modal aria-label="Reserve a Table">Reserve a Table</button>
+          <a href="#gallery" class="hero-cta-btn cta-explore" data-route="gallery" aria-label="Explore Gallery">Explore</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         2. ABOUT PAGE VIEW
+         ==================================================================== -->
+    <section class="page-view inner-page-container" id="aboutView" data-view="about">
+      <div class="inner-page-content">
+        
+        <!-- Elegant Page Header -->
+        <div class="page-header-block">
+          <span class="page-header-tag">HERITAGE & STORY</span>
+          <h1 class="page-title">ABOUT</h1>
+          <p class="page-subtitle">"Where Telugu Stories Meet the Table"</p>
+          <div class="header-flourish" aria-hidden="true">
+            <span class="flourish-line"></span>
+            <span class="flourish-flower">❁</span>
+            <span class="flourish-line"></span>
+          </div>
+        </div>
+
+        <!-- Story Content Layout -->
+        <div class="about-narrative-card">
+          <p class="narrative-lead">
+            Tales of Telugu is a celebration of the flavours, stories and traditions that have travelled through generations of Telugu kitchens. Inspired by the rich cultural tapestries of Telangana, Coastal Andhra, and Rayalaseema, we invite you to experience a culinary journey where every recipe carries an ancestral memory, and every spice tells a story.
+          </p>
+
+          <div class="narrative-grid">
+            
+            <div class="story-block">
+              <div class="story-icon">❁</div>
+              <h3 class="story-title">Sacred Soil & Regional Spices</h3>
+              <p class="story-desc">
+                From the fiery sun-dried chillies of Guntur and aromatic gongura leaves of Coastal Andhra to the earthy wood-fired handi curries of Telangana, our kitchens honor native grains, cold-pressed oils, and hand-ground spice blends.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <div class="story-icon">❁</div>
+              <h3 class="story-title">Storytelling at Every Gathering</h3>
+              <p class="story-desc">
+                In Telugu folklore, meals were never eaten in haste. They were grand gatherings under neem verandas—where elders recounted ancient fables, folk songs echoed in the background, and food brought hearts together.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <div class="story-icon">❁</div>
+              <h3 class="story-title">Timeless Telugu Hospitality</h3>
+              <p class="story-desc">
+                Served on pristine banana leaves, antique brassware, and clay pottery, every meal at Tales of Telugu reflects *Atithi Devo Bhava*—offering boundless warmth, affection, and respect to every guest.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Philosophy Callout Box -->
+          <div class="philosophy-callout">
+            <span class="quote-mark">“</span>
+            <p class="philosophy-quote">Rooted in the Soil, Seasoned by Heritage, Served with Love.</p>
+            <span class="philosophy-sign">Tales of Telugu</span>
+          </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-home-wrapper">
+          <a href="#home" class="back-home-link" data-route="home">
+            <span class="back-arrow">←</span> Back to Home
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. GALLERY PAGE VIEW
+         ==================================================================== -->
+    <section class="page-view inner-page-container" id="galleryView" data-view="gallery">
+      <div class="inner-page-content">
+        
+        <!-- Elegant Page Header -->
+        <div class="page-header-block">
+          <span class="page-header-tag">VISUAL ARCHIVE</span>
+          <h1 class="page-title">GALLERY</h1>
+          <p class="page-subtitle">"A Glimpse Into Our World"</p>
+          <div class="header-flourish" aria-hidden="true">
+            <span class="flourish-line"></span>
+            <span class="flourish-flower">❁</span>
+            <span class="flourish-line"></span>
+          </div>
+        </div>
+
+        <!-- Folk-Art Category Selector Tabs -->
+        <div class="gallery-category-bar">
+          <button class="gallery-tab-btn active" data-category="ambiance">AMBIANCE</button>
+          <span class="category-sep" aria-hidden="true">❁</span>
+          <button class="gallery-tab-btn" data-category="food">FOOD</button>
+        </div>
+
+        <!-- Gallery Scrollable Image Area -->
+        <div class="gallery-scroll-area">
+          <div class="gallery-grid" id="galleryGrid">
+            <!-- Populated dynamically via main.js from galleryData -->
+          </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-home-wrapper">
+          <a href="#home" class="back-home-link" data-route="home">
+            <span class="back-arrow">←</span> Back to Home
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. HERITAGE MENU PAGE VIEW
+         ==================================================================== -->
+    <section class="page-view inner-page-container" id="menuView" data-view="menu">
+      <div class="inner-page-content menu-page-wrapper">
+        
+        <!-- MASTER MENU CARD CONTAINER -->
+        <div class="menu-card-frame">
+          
+          <!-- MENU CARD HEADER -->
+          <div class="menu-card-header">
+            <div class="menu-brand-header">
+              <img src="assets/logo-horizontal-transparent.png" alt="Tales of Telugu Logo" class="menu-logo-img" />
+              <div class="menu-header-flourish" aria-hidden="true">
+                <span class="m-flourish-line"></span>
+                <span class="m-flourish-icon">❁</span>
+                <h2 class="menu-card-title">Our Menu</h2>
+                <span class="m-flourish-icon">❁</span>
+                <span class="m-flourish-line"></span>
+              </div>
+              <p class="menu-header-subtitle">Authentic Flavors, Traditional Roots</p>
+            </div>
+
+          </div>
+
+          <!-- CATEGORY GRID PANEL (shown by default) -->
+          <div class="menu-category-grid-panel" id="menuCategoryGridPanel">
+            <div class="menu-category-grid" id="menuCategoryGrid">
+              <!-- Dynamically populated via main.js -->
+            </div>
+          </div>
+
+          <!-- ITEMS PANEL (shown when a category is selected) -->
+          <div class="menu-items-panel" id="menuItemsPanel" style="display:none;">
+            <!-- Back to Categories -->
+            <div class="menu-back-bar">
+              <button class="menu-back-btn" id="menuBackBtn" type="button">
+                <span class="menu-back-arrow">←</span>
+                <span>Back to Categories</span>
+              </button>
+              <div class="menu-active-cat-label" id="menuActiveCatLabel"></div>
+            </div>
+            <!-- SCROLLABLE DISH LIST AREA -->
+            <div class="menu-dish-scroll-area" id="menuDishScrollArea">
+              <div class="menu-dish-list" id="menuDishList">
+                <!-- Dynamically populated via main.js -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-home-wrapper">
+          <a href="#home" class="back-home-link" data-route="home">
+            <span class="back-arrow">←</span> Back to Home
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. RESERVATION PLACEHOLDER VIEW
+         ==================================================================== -->
+    <section class="page-view inner-page-container" id="reservationView" data-view="reservation">
+      <div class="inner-page-content">
+        
+        <!-- Elegant Page Header -->
+        <div class="page-header-block">
+          <span class="page-header-tag">TABLE BOOKINGS</span>
+          <h1 class="page-title">RESERVATIONS</h1>
+          <p class="page-subtitle">"A Royal Telugu Dining Experience"</p>
+          <div class="header-flourish" aria-hidden="true">
+            <span class="flourish-line"></span>
+            <span class="flourish-flower">❁</span>
+            <span class="flourish-line"></span>
+          </div>
+        </div>
+
+        <div class="placeholder-card">
+          <div class="placeholder-icon">❁</div>
+          <h2 class="placeholder-title">Book Your Telugu Feasting Experience</h2>
+          <p class="placeholder-text">
+            Join us for an authentic Telugu dining journey inspired by Andhra and Telangana traditions. Reserve your table now for courtyard family feasts and royal hospitality.
+          </p>
+          
+          <div style="margin: 24px 0 20px;">
+            <button type="button" class="hero-cta-btn cta-reserve" id="pageReserveBtn" data-reserve-modal aria-label="Reserve a Table Now">
+              Reserve a Table
+            </button>
+          </div>
+
+          <div class="reservation-info-box">
+            <p><strong>For Table Inquiries & Private Dining:</strong></p>
+            <p>Email: <em>reservations@talesoftelugu.com</em></p>
+            <p>Dining Hours: Lunch 12:00 PM – 3:30 PM | Dinner 7:00 PM – 11:00 PM</p>
+          </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-home-wrapper">
+          <a href="#home" class="back-home-link" data-route="home">
+            <span class="back-arrow">←</span> Back to Home
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM FOLK-ART BORDER & MUD FLOOR -->
+  <footer class="hero-footer-border">
+    <!-- Traditional Geometric Folk Art Band -->
+    <div class="folk-geometric-band">
+      <svg viewBox="0 0 1200 24" preserveAspectRatio="none" class="geometric-band-svg">
+        <pattern id="folkTrianglePattern" width="30" height="24" patternUnits="userSpaceOnUse">
+          <polygon points="15,2 28,20 2,20" fill="#bb4125" />
+          <polygon points="15,6 24,18 6,18" fill="#f4e8d3" />
+          <circle cx="15" cy="12" r="2.5" fill="#194326" />
+          <circle cx="0" cy="20" r="2" fill="#194326" />
+          <circle cx="30" cy="20" r="2" fill="#194326" />
+        </pattern>
+        <rect width="1200" height="24" fill="url(#folkTrianglePattern)" />
+      </svg>
+    </div>
+
+    <!-- Heritage Mud Floor Texture Base -->
+    <div class="mud-floor-container">
+      <div class="mud-floor-texture"></div>
+      <div class="mud-floor-lighting"></div>
+    </div>
+  </footer>
+
+  <!-- HERITAGE LIGHTBOX MODAL FOR GALLERY -->
+  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-card">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Lightbox">✕</button>
+      
+      <div class="lightbox-media-wrapper">
+        <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrevBtn" aria-label="Previous Image">‹</button>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+        <button class="lightbox-nav-btn lightbox-next" id="lightboxNextBtn" aria-label="Next Image">›</button>
+      </div>
+
+      <div class="lightbox-info">
+        <span class="lightbox-category-tag" id="lightboxCategory">AMBIANCE</span>
+        <h3 class="lightbox-title" id="lightboxTitle">Image Title</h3>
+        <p class="lightbox-caption" id="lightboxCaption">Image description text</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       RESERVATION MODAL — single shared instance for all triggers
+       ====================================================================== -->
+  <div class="reserve-overlay" id="reserveOverlay" role="dialog" aria-modal="true"
+       aria-labelledby="reserveModalTitle" aria-hidden="true" tabindex="-1">
+    <div class="reserve-modal" id="reserveModal">
+
+      <!-- Close button -->
+      <button class="reserve-close-btn" id="reserveCloseBtn" type="button" aria-label="Close reservation form">✕</button>
+
+      <!-- Modal header -->
+      <div class="reserve-modal-header">
+        <p class="reserve-modal-tag">TALES OF TELUGU</p>
+        <h2 class="reserve-modal-title" id="reserveModalTitle">Reserve a Table</h2>
+        <p class="reserve-modal-subtitle">Join us for a taste of Telugu tradition.</p>
+        <div class="reserve-header-flourish" aria-hidden="true">
+          <span class="reserve-flourish-line"></span>
+          <span class="reserve-flourish-flower">❁</span>
+          <span class="reserve-flourish-line"></span>
+        </div>
+      </div>
+
+      <!-- Scrollable form body -->
+      <div class="reserve-modal-body" id="reserveModalBody">
+        <form class="reserve-form" id="reserveForm" novalidate autocomplete="on">
+
+          <!-- Full Name -->
+          <div class="reserve-field-group">
+            <label class="reserve-label" for="rf-name">Full Name <span class="reserve-req" aria-hidden="true">*</span></label>
+            <input class="reserve-input" type="text" id="rf-name" name="name"
+              placeholder="e.g. Ravi Shankar" required autocomplete="name" />
+            <span class="reserve-error" id="rf-name-err" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Phone -->
+          <div class="reserve-field-group">
+            <label class="reserve-label" for="rf-phone">Phone Number <span class="reserve-req" aria-hidden="true">*</span></label>
+            <div class="reserve-phone-wrap">
+              <span class="reserve-phone-prefix">+91</span>
+              <input class="reserve-input reserve-input-phone" type="tel" id="rf-phone" name="phone"
+                placeholder="9876543210" required maxlength="10" pattern="[6-9][0-9]{9}"
+                autocomplete="tel" inputmode="numeric" />
+            </div>
+            <span class="reserve-error" id="rf-phone-err" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Email -->
+          <div class="reserve-field-group">
+            <label class="reserve-label" for="rf-email">Email Address <span class="reserve-req" aria-hidden="true">*</span></label>
+            <input class="reserve-input" type="email" id="rf-email" name="email"
+              placeholder="you@example.com" required autocomplete="email" />
+            <span class="reserve-error" id="rf-email-err" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Guests + Occasion -->
+          <div class="reserve-row-2col">
+            <div class="reserve-field-group">
+              <label class="reserve-label" for="rf-guests">Guests <span class="reserve-req" aria-hidden="true">*</span></label>
+              <select class="reserve-select" id="rf-guests" name="guests" required>
+                <option value="">Select</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7">7 Guests</option>
+                <option value="8">8 Guests</option>
+                <option value="9">9 Guests</option>
+                <option value="10">10 Guests</option>
+                <option value="12">12 Guests</option>
+                <option value="15">15 Guests</option>
+                <option value="20">20 Guests</option>
+              </select>
+              <span class="reserve-error" id="rf-guests-err" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="reserve-field-group">
+              <label class="reserve-label" for="rf-occasion">Occasion</label>
+              <select class="reserve-select" id="rf-occasion" name="occasion">
+                <option value="">No specific occasion</option>
+                <option value="Birthday">Birthday 🎂</option>
+                <option value="Anniversary">Anniversary 💍</option>
+                <option value="Family Gathering">Family Gathering</option>
+                <option value="Business">Business Meal</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Date + Time -->
+          <div class="reserve-row-2col">
+            <div class="reserve-field-group">
+              <label class="reserve-label" for="rf-date">Date <span class="reserve-req" aria-hidden="true">*</span></label>
+              <input class="reserve-input" type="date" id="rf-date" name="date" required autocomplete="off" />
+              <span class="reserve-error" id="rf-date-err" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="reserve-field-group">
+              <label class="reserve-label" for="rf-time">Time <span class="reserve-req" aria-hidden="true">*</span></label>
+              <select class="reserve-select" id="rf-time" name="time" required>
+                <option value="">Select slot</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="12:30 PM">12:30 PM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="1:30 PM">1:30 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="2:30 PM">2:30 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="3:30 PM">3:30 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="4:30 PM">4:30 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+                <option value="5:30 PM">5:30 PM</option>
+                <option value="6:00 PM">6:00 PM</option>
+                <option value="6:30 PM">6:30 PM</option>
+                <option value="7:00 PM">7:00 PM</option>
+                <option value="7:30 PM">7:30 PM</option>
+                <option value="8:00 PM">8:00 PM</option>
+                <option value="8:30 PM">8:30 PM</option>
+                <option value="9:00 PM">9:00 PM</option>
+                <option value="9:30 PM">9:30 PM</option>
+                <option value="10:00 PM">10:00 PM</option>
+                <option value="10:30 PM">10:30 PM</option>
+              </select>
+              <span class="reserve-error" id="rf-time-err" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Seating Preference -->
+          <div class="reserve-field-group">
+            <span class="reserve-label">Seating Preference</span>
+            <div class="reserve-radio-group">
+              <label class="reserve-radio-label">
+                <input type="radio" name="seating" value="No preference" checked /> No preference
+              </label>
+              <label class="reserve-radio-label">
+                <input type="radio" name="seating" value="Indoor" /> Indoor
+              </label>
+              <label class="reserve-radio-label">
+                <input type="radio" name="seating" value="Outdoor" /> Outdoor
+              </label>
+            </div>
+          </div>
+
+          <!-- Special Requests -->
+          <div class="reserve-field-group">
+            <label class="reserve-label" for="rf-note">Special Requests / Notes</label>
+            <textarea class="reserve-input reserve-textarea" id="rf-note" name="note" rows="3"
+              placeholder="Dietary needs, seating preferences, celebrations…" maxlength="500"></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button class="reserve-submit-btn" id="reserveSubmitBtn" type="submit">
+            <span class="reserve-btn-text">Reserve My Table</span>
+            <span class="reserve-btn-spinner" aria-hidden="true" hidden>⟳</span>
+          </button>
+
+        </form>
+      </div><!-- /#reserveModalBody -->
+
+    </div><!-- /.reserve-modal -->
+  </div><!-- /.reserve-overlay -->
+
+  <!-- Gemini API key config (gitignored — safe for local dev) -->
+  <script src="gemini-config.js"></script>
+  <!-- Site Storage Layer for Dynamic CMS Sync & Reservations -->
+  <script src="site-store.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,12 @@
+{
+  "name": "tales-of-telugu",
+  "version": "1.0.0",
+  "description": "Tales of Telugu — Authentic Telugu Culinary Journey & Heritage CMS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "Tales of Telugu",
+  "license": "ISC"
+}

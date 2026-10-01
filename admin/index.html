@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin Portal — Tales of Telugu</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Scoped Admin Styles -->
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- =====================================================================
+       1. BRANDED LOGIN SCREEN
+       ===================================================================== -->
+  <div class="admin-login-view" id="loginView">
+    <div class="admin-login-card">
+      <div class="admin-brand-icon">❁</div>
+      <h1 class="admin-login-title">Tales of Telugu</h1>
+      <p class="admin-login-sub">Admin Portal</p>
+
+      <div class="admin-login-err" id="loginError" role="alert">
+        Invalid username or password. Please try again.
+      </div>
+
+      <form class="admin-login-form" id="loginForm" autocomplete="off">
+        <div class="admin-field">
+          <label for="loginUser">Username</label>
+          <input class="admin-input" type="text" id="loginUser" required autocomplete="username" placeholder="e.g. admin" />
+        </div>
+        <div class="admin-field">
+          <label for="loginPass">Password</label>
+          <input class="admin-input" type="password" id="loginPass" required autocomplete="current-password" placeholder="••••••••" />
+        </div>
+        <button class="admin-btn admin-login-btn" type="submit">Sign In to Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. ADMIN MAIN APPLICATION SHELL
+       ===================================================================== -->
+  <div class="admin-shell" id="adminApp" style="display: none;">
+
+    <!-- Left Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <span class="admin-sidebar-logo">❁</span>
+        <div>
+          <h2 class="admin-sidebar-title">Tales of Telugu</h2>
+          <span class="admin-sidebar-sub">Admin CMS</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="#gallery" class="admin-nav-link active" data-nav="gallery">
+            <span class="admin-nav-icon">🖼️</span>
+            <span>Gallery</span>
+            <span class="admin-nav-badge" id="badgeGalleryCount">10</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#about" class="admin-nav-link" data-nav="about">
+            <span class="admin-nav-icon">📖</span>
+            <span>About Content</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#menu" class="admin-nav-link" data-nav="menu">
+            <span class="admin-nav-icon">🍲</span>
+            <span>Menu Dishes</span>
+            <span class="admin-nav-badge">92</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#reservations" class="admin-nav-link" data-nav="reservations">
+            <span class="admin-nav-icon">📅</span>
+            <span>Reservations</span>
+            <span class="admin-nav-badge" id="badgeReserveCount">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-storage-widget">
+          <div class="admin-storage-title">
+            <span>Storage Usage</span>
+            <span id="storageUsageText">0 KB / 5 MB</span>
+          </div>
+          <div class="admin-storage-bar-track">
+            <div class="admin-storage-bar-fill" id="storageUsageBar"></div>
+          </div>
+        </div>
+        <button class="admin-btn admin-logout-btn" id="logoutBtn" type="button">
+          <span>↪ Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="admin-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-mobile-toggle" id="mobileMenuBtn" aria-label="Toggle menu">☰</button>
+          <h1 class="admin-view-title" id="pageHeading">Gallery Manager</h1>
+        </div>
+        <div class="admin-topbar-actions">
+          <a href="/" class="admin-site-link" target="_blank" rel="noopener">
+            <span>View Public Site ↗</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="admin-content">
+
+        <!-- ===============================================================
+             SECTION: GALLERY MANAGER
+             =============================================================== -->
+        <section class="admin-view-panel" id="viewGallery">
+          
+          <div class="admin-section-header">
+            <div class="admin-section-intro">
+              <h2>Visual Archive (Gallery)</h2>
+              <p>Manage ambiance & culinary photos, captions, and display order.</p>
+            </div>
+            <div class="admin-section-actions">
+              <button class="admin-btn admin-btn-secondary" id="btnResetGallery" type="button">
+                <span>↺ Reset to Original Gallery</span>
+              </button>
+              <button class="admin-btn admin-btn-terracotta" id="btnAddPhoto" type="button">
+                <span>+ Add New Photo</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Storage warning alert -->
+          <div class="admin-alert-banner" id="storageAlertBanner">
+            <span>⚠️ <strong>Storage Warning:</strong> Local storage is over 80% capacity. Upload smaller images to avoid browser storage limits.</span>
+          </div>
+
+          <!-- Tabs -->
+          <div class="admin-tabs">
+            <button class="admin-tab-btn active" data-gallery-tab="ambiance" type="button">Ambiance Photos</button>
+            <button class="admin-tab-btn" data-gallery-tab="food" type="button">Food Photos</button>
+          </div>
+
+          <!-- Photos Grid -->
+          <div class="admin-gallery-grid" id="galleryCardsGrid">
+            <!-- Dynamic cards rendered by admin.js -->
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             SECTION: ABOUT CONTENT MANAGER
+             =============================================================== -->
+        <section class="admin-view-panel" id="viewAbout" style="display: none;">
+          
+          <div class="admin-section-header">
+            <div class="admin-section-intro">
+              <h2>About & Heritage Story</h2>
+              <p>Edit hero titles, brand narrative lead, story blocks, and core philosophy quote.</p>
+            </div>
+            <div class="admin-section-actions">
+              <button class="admin-btn admin-btn-secondary" id="btnResetAbout" type="button">
+                <span>↺ Reset to Original About</span>
+              </button>
+              <button class="admin-btn admin-btn-primary" id="btnSaveAbout" type="button">
+                <span>✓ Save Changes</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. Header Information -->
+          <div class="admin-card-panel">
+            <h3 class="admin-panel-title">1. Page Header Block</h3>
+            <div class="admin-grid-3">
+              <div class="admin-field">
+                <label for="aboutHeroTag">Header Tagline</label>
+                <input class="admin-input" type="text" id="aboutHeroTag" placeholder="e.g. HERITAGE & STORY" />
+              </div>
+              <div class="admin-field">
+                <label for="aboutHeroTitle">Main Page Title</label>
+                <input class="admin-input" type="text" id="aboutHeroTitle" placeholder="e.g. ABOUT" />
+              </div>
+              <div class="admin-field">
+                <label for="aboutHeroSubtitle">Subtitle (In quotes)</label>
+                <input class="admin-input" type="text" id="aboutHeroSubtitle" placeholder='e.g. "Where Telugu Stories Meet the Table"' />
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Narrative Lead -->
+          <div class="admin-card-panel">
+            <h3 class="admin-panel-title">2. Narrative Lead Paragraph</h3>
+            <div class="admin-field">
+              <label for="aboutLead">Introductory Story Paragraph</label>
+              <textarea class="admin-textarea" id="aboutLead" rows="4" placeholder="Story text introducing Tales of Telugu..."></textarea>
+            </div>
+          </div>
+
+          <!-- 3. Heritage Cards -->
+          <div class="admin-card-panel">
+            <div class="admin-panel-title">
+              <span>3. Heritage Story Cards (Grid)</span>
+              <button class="admin-btn admin-btn-sm admin-btn-terracotta" id="btnAddStoryCard" type="button">+ Add Heritage Card</button>
+            </div>
+            <div class="admin-story-cards-list" id="storyCardsList">
+              <!-- Rendered by admin.js -->
+            </div>
+          </div>
+
+          <!-- 4. Philosophy Callout Box -->
+          <div class="admin-card-panel">
+            <h3 class="admin-panel-title">4. Philosophy Callout Box</h3>
+            <div class="admin-grid-2">
+              <div class="admin-field">
+                <label for="aboutQuote">Philosophy Quote</label>
+                <input class="admin-input" type="text" id="aboutQuote" placeholder="e.g. Rooted in the Soil, Seasoned by Heritage, Served with Love." />
+              </div>
+              <div class="admin-field">
+                <label for="aboutQuoteSign">Quote Sign-off</label>
+                <input class="admin-input" type="text" id="aboutQuoteSign" placeholder="e.g. Tales of Telugu" />
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===============================================================
+             SECTION: MENU MANAGER
+             =============================================================== -->
+        <section class="admin-view-panel" id="viewMenu" style="display: none;">
+          
+          <div class="admin-section-header">
+            <div class="admin-section-intro">
+              <h2>Heritage Menu Manager</h2>
+              <p>Organize categories, reorder dishes, update prices & ingredients, and manage dish photos.</p>
+            </div>
+            <div class="admin-section-actions">
+              <button class="admin-btn admin-btn-secondary" id="btnResetMenu" type="button">
+                <span>↺ Reset Menu to Original</span>
+              </button>
+              <button class="admin-btn admin-btn-terracotta" id="btnAddCategoryBtn" type="button">
+                <span>+ Add Category</span>
+              </button>
+              <button class="admin-btn admin-btn-primary" id="btnAddDishBtn" type="button">
+                <span>+ Add New Dish</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Storage warning alert for Menu -->
+          <div class="admin-alert-banner" id="menuStorageAlertBanner">
+            <span>⚠️ <strong>Storage Warning:</strong> Local storage is over 80% capacity. Avoid uploading oversized dish photos.</span>
+          </div>
+
+          <!-- Categories Bar Panel -->
+          <div class="admin-card-panel" style="padding: 16px 20px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <h3 style="font-family: var(--adm-font-serif); font-size: 1.05rem; color: var(--adm-green-deep);">
+                Categories (<span id="categoriesTotalCount">8</span>)
+              </h3>
+              <small style="color: var(--adm-text-muted);">Click a category pill to filter, or use buttons to edit / reorder.</small>
+            </div>
+            
+            <div class="admin-category-pills" id="categoryPillsContainer">
+              <!-- Rendered by admin.js -->
+            </div>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div class="admin-dish-toolbar">
+            <div class="admin-search-wrap">
+              <span class="admin-search-icon">🔍</span>
+              <input class="admin-input admin-search-input" type="text" id="dishSearchInput" placeholder="Search dishes by name, ingredients, or subcategory across all categories..." />
+              <button class="admin-btn admin-btn-sm admin-btn-secondary" id="btnClearDishSearch" type="button" style="display: none;">✕ Clear</button>
+            </div>
+            <div class="admin-dish-stats" id="dishStatsText">
+              Showing dishes
+            </div>
+          </div>
+
+          <!-- Dishes Container grouped by subcategory -->
+          <div id="dishesListContainer">
+            <!-- Rendered by admin.js -->
+          </div>
+
+        </section>
+
+        <!-- ===============================================================
+             SECTION: RESERVATIONS MANAGER
+             =============================================================== -->
+        <section class="admin-view-panel" id="viewReservations" style="display: none;">
+          <div class="admin-section-header">
+            <div class="admin-section-intro">
+              <h2>Guest Reservations Manager</h2>
+              <p>Manage dining reservations, update customer booking statuses, filter schedules, and export booking data.</p>
+            </div>
+            <div class="admin-section-actions">
+              <button class="admin-btn admin-btn-secondary" id="btnExportReservationsCSV" type="button" title="Export current filtered list to CSV">
+                <span>📥 Export CSV</span>
+              </button>
+              <button class="admin-btn admin-btn-terracotta" id="btnAddSampleReservations" type="button" title="Load 6 realistic sample bookings">
+                <span>+ Add Sample Reservations</span>
+              </button>
+              <button class="admin-btn admin-btn-danger admin-btn-sm" id="btnClearReservations" type="button" title="Remove all saved bookings">
+                <span>Clear All</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Summary KPI Row -->
+          <div class="admin-kpi-grid">
+            <div class="admin-kpi-card" id="kpiCardToday" role="button" tabindex="0" title="Filter by Today's bookings">
+              <div class="admin-kpi-icon">📅</div>
+              <div class="admin-kpi-content">
+                <span class="admin-kpi-label">Today's Bookings</span>
+                <span class="admin-kpi-value" id="kpiTodayCount">0</span>
+              </div>
+            </div>
+            <div class="admin-kpi-card" id="kpiCardUpcoming" role="button" tabindex="0" title="Filter by Upcoming bookings">
+              <div class="admin-kpi-icon">⏳</div>
+              <div class="admin-kpi-content">
+                <span class="admin-kpi-label">Upcoming Bookings</span>
+                <span class="admin-kpi-value" id="kpiUpcomingCount">0</span>
+              </div>
+            </div>
+            <div class="admin-kpi-card admin-kpi-pending" id="kpiCardPending" role="button" tabindex="0" title="Filter by Pending bookings">
+              <div class="admin-kpi-icon">🔔</div>
+              <div class="admin-kpi-content">
+                <span class="admin-kpi-label">Pending Bookings</span>
+                <span class="admin-kpi-value" id="kpiPendingCount">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search & Filters Toolbar -->
+          <div class="admin-reservations-toolbar">
+            <div class="admin-search-wrap">
+              <span class="admin-search-icon">🔍</span>
+              <input class="admin-input admin-search-input" type="text" id="reserveSearchInput" placeholder="Search bookings by name or phone..." />
+              <button class="admin-btn admin-btn-sm admin-btn-secondary" id="btnClearReserveSearch" type="button" style="display: none;">✕ Clear</button>
+            </div>
+
+            <div class="admin-filters-bar">
+              <div class="admin-filter-group">
+                <span class="admin-filter-title">Date:</span>
+                <div class="admin-pill-group" id="dateFilterGroup">
+                  <button class="admin-filter-pill active" data-date-filter="all" type="button">All</button>
+                  <button class="admin-filter-pill" data-date-filter="today" type="button">Today</button>
+                  <button class="admin-filter-pill" data-date-filter="upcoming" type="button">Upcoming</button>
+                  <button class="admin-filter-pill" data-date-filter="past" type="button">Past</button>
+                </div>
+              </div>
+
+              <div class="admin-filter-group">
+                <span class="admin-filter-title">Status:</span>
+                <div class="admin-pill-group" id="statusFilterGroup">
+                  <button class="admin-filter-pill active" data-status-filter="all" type="button">All</button>
+                  <button class="admin-filter-pill" data-status-filter="Pending" type="button">Pending</button>
+                  <button class="admin-filter-pill" data-status-filter="Confirmed" type="button">Confirmed</button>
+                  <button class="admin-filter-pill" data-status-filter="Cancelled" type="button">Cancelled</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-reservations-stats" id="reserveStatsText">
+            Showing reservations
+          </div>
+
+          <!-- Table & Mobile Cards Container -->
+          <div class="admin-card-panel admin-reservations-panel">
+            <div class="admin-table-responsive">
+              <table class="admin-reservations-table">
+                <thead>
+                  <tr>
+                    <th>Guest</th>
+                    <th>Contact</th>
+                    <th>Party</th>
+                    <th>Occasion & Seating</th>
+                    <th>Schedule</th>
+                    <th>Special Requests</th>
+                    <th>Status</th>
+                    <th>Booked On</th>
+                    <th style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="reservationsTableBody">
+                  <!-- Dynamically rendered -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty State Notice -->
+            <div class="admin-empty-state" id="noReservationsNotice" style="display: none;">
+              <div class="admin-empty-icon">🌿</div>
+              <h3 id="noReservationsTitle">No reservations yet</h3>
+              <p id="noReservationsDesc">Reservations made on the public website will automatically appear here.</p>
+              <button class="admin-btn admin-btn-terracotta" id="btnEmptyAddSamples" type="button" style="margin-top: 14px;">
+                + Add 6 Sample Reservations
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /.admin-content -->
+    </main>
+  </div><!-- /.admin-shell -->
+
+  <!-- =====================================================================
+       3. REUSABLE MODALS
+       ===================================================================== -->
+
+  <!-- Photo Modal (Add / Edit) -->
+  <div class="admin-modal-overlay" id="photoModal">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="photoModalTitle">Add Photo</h3>
+        <button class="admin-modal-close" data-close-modal="photoModal" type="button">✕</button>
+      </div>
+      <form id="photoForm">
+        <div class="admin-modal-body">
+          
+          <!-- Image upload & dropzone -->
+          <div class="admin-field">
+            <label>Image File <span style="color: var(--adm-terracotta);">*</span></label>
+            <div class="admin-dropzone" id="photoDropzone">
+              <div class="admin-dropzone-icon">📷</div>
+              <p class="admin-dropzone-text">Click or drag & drop an image here</p>
+              <p class="admin-dropzone-hint">Automatically resized to max 1200px JPEG (~80%)</p>
+              <input type="file" id="photoFileInput" accept="image/*" />
+            </div>
+            
+            <div class="admin-preview-box" id="photoPreviewBox">
+              <img src="" alt="Preview" class="admin-preview-img" id="photoPreviewImg" />
+              <span class="admin-preview-size" id="photoPreviewSize">0 KB</span>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="admin-field">
+            <label for="photoTitle">Title <span style="color: var(--adm-terracotta);">*</span></label>
+            <input class="admin-input" type="text" id="photoTitle" required placeholder="e.g. Paneer Lukhmi" />
+          </div>
+
+          <div class="admin-field">
+            <label for="photoSubtitle">Subtitle <span style="color: var(--adm-terracotta);">*</span></label>
+            <input class="admin-input" type="text" id="photoSubtitle" required placeholder="e.g. Stuffed Savory Pastry" />
+          </div>
+
+          <div class="admin-field">
+            <label for="photoCaption">Caption / Story Description</label>
+            <textarea class="admin-textarea" id="photoCaption" rows="3" placeholder="Full descriptive story shown in the lightbox..."></textarea>
+          </div>
+
+        </div>
+        <div class="admin-modal-footer">
+          <button class="admin-btn admin-btn-secondary" data-close-modal="photoModal" type="button">Cancel</button>
+          <button class="admin-btn admin-btn-primary" type="submit" id="btnSavePhotoSubmit">Save Photo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Story Card Modal (Add / Edit) -->
+  <div class="admin-modal-overlay" id="cardModal">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="cardModalTitle">Add Heritage Card</h3>
+        <button class="admin-modal-close" data-close-modal="cardModal" type="button">✕</button>
+      </div>
+      <form id="cardForm">
+        <div class="admin-modal-body">
+          <div class="admin-field">
+            <label for="cardIcon">Symbol / Icon (Emoji or Flourish)</label>
+            <input class="admin-input" type="text" id="cardIcon" value="❁" maxlength="6" style="width: 100px; text-align: center; font-size: 1.2rem;" />
+          </div>
+          <div class="admin-field">
+            <label for="cardTitle">Card Title <span style="color: var(--adm-terracotta);">*</span></label>
+            <input class="admin-input" type="text" id="cardTitle" required placeholder="e.g. Sacred Soil & Regional Spices" />
+          </div>
+          <div class="admin-field">
+            <label for="cardDesc">Card Description <span style="color: var(--adm-terracotta);">*</span></label>
+            <textarea class="admin-textarea" id="cardDesc" rows="4" required placeholder="Detailed story about this aspect of Telugu culinary heritage..."></textarea>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button class="admin-btn admin-btn-secondary" data-close-modal="cardModal" type="button">Cancel</button>
+          <button class="admin-btn admin-btn-primary" type="submit">Save Heritage Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Modal (Add / Edit) -->
+  <div class="admin-modal-overlay" id="categoryModal">
+    <div class="admin-modal" style="max-width: 480px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="categoryModalTitle">Add Category</h3>
+        <button class="admin-modal-close" data-close-modal="categoryModal" type="button">✕</button>
+      </div>
+      <form id="categoryForm">
+        <div class="admin-modal-body">
+          <div class="admin-grid-2">
+            <div class="admin-field" style="max-width: 110px;">
+              <label for="categoryIcon">Icon (Emoji)</label>
+              <input class="admin-input" type="text" id="categoryIcon" value="🍽️" maxlength="4" style="text-align: center; font-size: 1.3rem;" required />
+            </div>
+            <div class="admin-field">
+              <label for="categoryName">Category Name <span style="color: var(--adm-terracotta);">*</span></label>
+              <input class="admin-input" type="text" id="categoryName" required placeholder="e.g. Seafood Delights" />
+            </div>
+          </div>
+          <div class="admin-field">
+            <label for="categorySlug">Unique Identifier (Slug) <span style="color: var(--adm-terracotta);">*</span></label>
+            <input class="admin-input" type="text" id="categorySlug" required pattern="[a-z0-9_-]+" placeholder="e.g. seafood-delights" />
+            <small style="color: var(--adm-text-muted); display: block; margin-top: 4px;">Lowercase letters, numbers, and dashes only.</small>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button class="admin-btn admin-btn-secondary" data-close-modal="categoryModal" type="button">Cancel</button>
+          <button class="admin-btn admin-btn-primary" type="submit">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dish Modal (Add / Edit) -->
+  <div class="admin-modal-overlay" id="dishModal">
+    <div class="admin-modal" style="max-width: 620px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="dishModalTitle">Add New Dish</h3>
+        <button class="admin-modal-close" data-close-modal="dishModal" type="button">✕</button>
+      </div>
+      <form id="dishForm">
+        <div class="admin-modal-body">
+          
+          <div class="admin-grid-2">
+            <!-- Category -->
+            <div class="admin-field">
+              <label for="dishCategory">Category <span style="color: var(--adm-terracotta);">*</span></label>
+              <select class="admin-select" id="dishCategory" required>
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <!-- Subcategory -->
+            <div class="admin-field">
+              <label for="dishSubcategory">Subcategory <span style="color: var(--adm-terracotta);">*</span></label>
+              <input class="admin-input" list="dishSubcategoryList" id="dishSubcategory" required placeholder="e.g. Vegetarian Starters" autocomplete="off" />
+              <datalist id="dishSubcategoryList"></datalist>
+            </div>
+          </div>
+
+          <div class="admin-grid-2">
+            <!-- Dish Title -->
+            <div class="admin-field">
+              <label for="dishTitle">Dish Name <span style="color: var(--adm-terracotta);">*</span></label>
+              <input class="admin-input" type="text" id="dishTitle" required placeholder="e.g. Gongura Mamsam" />
+            </div>
+            <!-- Price -->
+            <div class="admin-field">
+              <label for="dishPrice">Price (₹ INR) <span style="color: var(--adm-terracotta);">*</span></label>
+              <input class="admin-input" type="number" id="dishPrice" min="1" max="10000" step="5" required placeholder="e.g. 320" />
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="admin-field">
+            <label for="dishDesc">Short Description</label>
+            <textarea class="admin-textarea" id="dishDesc" rows="2" placeholder="Brief appetizing description of the dish..."></textarea>
+          </div>
+
+          <!-- Ingredients -->
+          <div class="admin-field">
+            <label for="dishIngredients">Ingredients (comma-separated)</label>
+            <textarea class="admin-textarea" id="dishIngredients" rows="2" placeholder="e.g. Tender mutton, gongura sorrel leaves, green chillies, garlic, spices"></textarea>
+          </div>
+
+          <!-- Image Upload (Optional) -->
+          <div class="admin-field">
+            <label>Dish Photo (Optional)</label>
+            <div class="admin-dropzone" id="dishDropzone">
+              <div class="admin-dropzone-icon">🍲</div>
+              <p class="admin-dropzone-text">Click or drop a photo (auto-resized to max 800px ~75%)</p>
+              <p class="admin-dropzone-hint">If skipped, the standard Telugu dish photo will be used.</p>
+              <input type="file" id="dishFileInput" accept="image/*" />
+            </div>
+            <div class="admin-preview-box" id="dishPreviewBox" style="display: none; margin-top: 10px;">
+              <img src="" alt="Preview" class="admin-preview-img" id="dishPreviewImg" style="height: 140px;" />
+              <span class="admin-preview-size" id="dishPreviewSize">0 KB</span>
+              <button class="admin-btn admin-btn-sm admin-btn-secondary" id="btnRemoveDishImg" type="button" style="position: absolute; top: 6px; right: 6px; padding: 2px 8px; font-size: 0.72rem;">Remove Photo</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="admin-modal-footer">
+          <button class="admin-btn admin-btn-secondary" data-close-modal="dishModal" type="button">Cancel</button>
+          <button class="admin-btn admin-btn-primary" type="submit">Save Dish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Move Dish Modal -->
+  <div class="admin-modal-overlay" id="moveDishModal">
+    <div class="admin-modal" style="max-width: 440px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title">Move Dish</h3>
+        <button class="admin-modal-close" data-close-modal="moveDishModal" type="button">✕</button>
+      </div>
+      <form id="moveDishForm">
+        <div class="admin-modal-body">
+          <p style="font-size: 0.95rem; margin-bottom: 16px;">
+            Move <strong id="moveDishName"></strong> to another category:
+          </p>
+          <div class="admin-field">
+            <label for="moveTargetCategory">Destination Category <span style="color: var(--adm-terracotta);">*</span></label>
+            <select class="admin-select" id="moveTargetCategory" required></select>
+          </div>
+          <div class="admin-field">
+            <label for="moveTargetSubcategory">Subcategory</label>
+            <input class="admin-input" list="moveSubcatList" id="moveTargetSubcategory" placeholder="Subcategory in target category..." />
+            <datalist id="moveSubcatList"></datalist>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button class="admin-btn admin-btn-secondary" data-close-modal="moveDishModal" type="button">Cancel</button>
+          <button class="admin-btn admin-btn-primary" type="submit">Move Dish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Dialog Modal -->
+  <div class="admin-modal-overlay" id="confirmModal">
+    <div class="admin-modal" style="max-width: 440px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="confirmModalTitle">Confirm Action</h3>
+        <button class="admin-modal-close" data-close-modal="confirmModal" type="button">✕</button>
+      </div>
+      <div class="admin-modal-body">
+        <p id="confirmModalMessage" style="color: var(--adm-text-main); font-size: 0.95rem; line-height: 1.5;"></p>
+      </div>
+      <div class="admin-modal-footer">
+        <button class="admin-btn admin-btn-secondary" data-close-modal="confirmModal" type="button">Cancel</button>
+        <button class="admin-btn admin-btn-danger" id="confirmModalActionBtn" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast -->
+  <div class="admin-toast" id="adminToast" role="status" aria-live="polite">
+    <span class="admin-toast-icon">✓</span>
+    <span class="admin-toast-text">Action completed successfully.</span>
+  </div>
+
+  <!-- Scripts (Loading Data Layer & Admin Controller) -->
+  <script src="/site-store.js"></script>
+  <script src="/admin/seed-data.js"></script>
+  <script src="/admin/admin-config.js"></script>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
