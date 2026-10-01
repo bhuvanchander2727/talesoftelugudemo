@@ -1467,23 +1467,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!messagesEl) return;
 
-    // Check for API key first — never log the key itself
-    const apiKey = window.GEMINI_API_KEY;
-    if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE' || !apiKey.trim()) {
-      console.warn(
-        '[Tales of Telugu] Gemini API key not set.\n' +
-        'Open gemini-config.js and replace YOUR_GEMINI_API_KEY_HERE with your key.\n' +
-        'Get a free key at: https://aistudio.google.com/app/apikey'
-      );
-      renderErrorMessage(
-        messagesEl,
-        'AI assistant is not configured yet. (Check the browser console for setup instructions.)',
-        dish,
-        userText
-      );
-      return;
-    }
-
     if (!navigator.onLine) {
       removeTypingIndicator(messagesEl);
       renderErrorMessage(messagesEl, 'You are currently offline. Please check your connection.', dish, userText);
@@ -1538,16 +1521,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }));
     }
 
+    // Endpoint resolution:
+    // If client has a valid key in gemini-config.js, use direct Google endpoint.
+    // Otherwise use Vercel /api/chat serverless function with process.env.GEMINI_API_KEY.
+    const clientKey = window.GEMINI_API_KEY;
+    const hasClientKey = Boolean(clientKey && clientKey !== 'YOUR_GEMINI_API_KEY_HERE' && clientKey.trim());
+
     const GEMINI_MODEL = 'gemini-flash-lite-latest';
-    const geminiUrl =
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+    const requestUrl = hasClientKey
+      ? `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${clientKey}`
+      : '/api/chat';
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
     activeChatState.abortController = controller;
 
     try {
-      const response = await fetch(geminiUrl, {
+      const response = await fetch(requestUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
@@ -1567,10 +1557,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let errText = 'Could not reach the AI right now. Please try again.';
         try {
           const errData = await response.json();
-          const status = errData.error && errData.error.status;
-          if (status === 'RESOURCE_EXHAUSTED') errText = 'AI is busy right now. Please try again in a moment.';
-          else if (status === 'INVALID_ARGUMENT') errText = 'Request could not be processed. Please try again.';
-          console.warn('[Tales of Telugu] Gemini error:', status);
+          if (errData && errData.error) {
+            if (typeof errData.error === 'string') {
+              errText = errData.error;
+            } else if (errData.error.status === 'RESOURCE_EXHAUSTED') {
+              errText = 'AI is busy right now. Please try again in a moment.';
+            } else if (errData.error.status === 'INVALID_ARGUMENT') {
+              errText = 'Request could not be processed. Please try again.';
+            }
+          }
+          console.warn('[Tales of Telugu] Gemini error response:', errData);
         } catch (_) { }
         renderErrorMessage(messagesEl, errText, dish, userText);
         return;

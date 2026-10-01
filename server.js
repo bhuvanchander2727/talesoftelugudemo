@@ -36,6 +36,43 @@ const server = http.createServer((req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
+  // Local handler for /api/chat serverless function
+  if (pathname === '/api/chat' || pathname === '/api/chat/') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Method not allowed' }));
+      return;
+    }
+    let bodyStr = '';
+    req.on('data', chunk => { bodyStr += chunk; });
+    req.on('end', async () => {
+      try {
+        req.body = bodyStr ? JSON.parse(bodyStr) : {};
+      } catch (_) {
+        req.body = {};
+      }
+      try {
+        delete require.cache[require.resolve('./api/chat.js')];
+        const chatHandler = require('./api/chat.js');
+        const mockRes = {
+          statusCode: 200,
+          headers: {},
+          status(code) { this.statusCode = code; return this; },
+          setHeader(k, v) { this.headers[k] = v; return this; },
+          json(data) {
+            res.writeHead(this.statusCode, Object.assign({ 'Content-Type': 'application/json' }, this.headers));
+            res.end(JSON.stringify(data));
+          }
+        };
+        await chatHandler(req, mockRes);
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Serverless execution error', message: err.message }));
+      }
+    });
+    return;
+  }
+
   // Explicit handling for /admin and root
   if (pathname === '/admin' || pathname === '/admin/') {
     pathname = '/admin/index.html';
